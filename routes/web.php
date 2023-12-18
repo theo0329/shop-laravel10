@@ -44,8 +44,3 @@ Route::get('/uud/{id}', [CheckUserController::class, 'show']);
 Route::post('/uudd', [CheckUserController::class, 'index']);
 
 route::get('/getCSRFToken', [HomeController::class, 'getCSRFToken']);
-<<<<<<< HEAD
-=======
-
->>>>>>> 02bb12e7936ce13e74994cfb9dde9ae5d7c52985
-Route::get('/carts', [CartController::class, 'showCart']);

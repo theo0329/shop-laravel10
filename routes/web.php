@@ -37,4 +37,8 @@ Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/addProduct/{productId}', [CartController::class, 'addItem']);
 Route::get('/removeItem/{productId}', [CartController::class, 'removeItem']);
 Route::get('/cart', [CartController::class, 'showCart']);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 02bb12e7936ce13e74994cfb9dde9ae5d7c52985
 Route::get('/carts', [CartController::class, 'showCart']);

@@ -81,4 +81,7 @@ volumes:
         driver: local
     sail-redis:
         driver: local
+<<<<<<< HEAD
 ..
+=======
+>>>>>>> 02bb12e7936ce13e74994cfb9dde9ae5d7c52985

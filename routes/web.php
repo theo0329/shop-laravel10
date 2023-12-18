@@ -1,8 +1,10 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CheckUserController;
 use App\Http\Controllers\CustomAuthController;
 
 /*
@@ -16,9 +18,9 @@ use App\Http\Controllers\CustomAuthController;
 |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 route::get('dashboard', [CustomAuthController::class, 'dashboard']);
 Route::get('login', [CustomAuthController::class, 'index'])->name('login');
@@ -37,6 +39,11 @@ Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/addProduct/{productId}', [CartController::class, 'addItem']);
 Route::get('/removeItem/{productId}', [CartController::class, 'removeItem']);
 Route::get('/cart', [CartController::class, 'showCart']);
+
+Route::get('/uud/{id}', [CheckUserController::class, 'show']);
+Route::post('/uudd', [CheckUserController::class, 'index']);
+
+route::get('/getCSRFToken', [HomeController::class, 'getCSRFToken']);
 <<<<<<< HEAD
 =======
 

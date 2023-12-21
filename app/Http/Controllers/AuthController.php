@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -45,5 +46,67 @@ class AuthController extends Controller
         }
 
         return response($response, 201);
+    }
+
+    public function login(Request $request)
+    {
+        $form = $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+        try {
+
+            $user = User::where('email', $form['email'])->first();
+
+            if (!$user || !Hash::check($form['password'], $user->password)) {
+                $response = [
+                    'code' => 401,
+                    'message' => '登入失敗',
+                ];
+                return response($response);
+            }
+
+            $token = $user->createToken($request->email)->accessToken; //passport
+            //$token = $user->createToken($request->email)->plainTextToken;  //Sanctum
+            $response = [
+                'code' => 201,
+                'user' => $user['name'],
+                'email' => $user['email'],
+                'token' => $token,
+            ];
+        } catch (Exception $e) {
+            $response = [
+                'message' => $e->getMessage(),
+            ];
+            return response($response);
+        }
+
+        return response($response);
+    }
+
+    public function logout(Request $request)
+    {
+        try {
+            if (Auth::check()) {
+                Auth::user()->token()->revoke();
+                $response = [
+                    'code' => 201,
+                    'message' => '您已登出!',
+                ];
+            } else {
+                $response = [
+                    'code' => 201,
+                    'message' => '您尚未登入!',
+                ];
+            }
+        } catch (Exception $e) {
+            $response = [
+                'message' => $e->getMessage(),
+            ];
+
+            return response($response);
+        }
+
+        return response($response);
     }
 }

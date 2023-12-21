@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckUserController;
+use App\Http\Controllers\CustomAuthController;
 
 //use App\Http\Controllers\AuthController;
 

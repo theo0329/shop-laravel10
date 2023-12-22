@@ -3,9 +3,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckUserController;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\ThirdPartyAuthController;
 
 //use App\Http\Controllers\AuthController;
 
@@ -46,3 +48,17 @@ Route::get('/uud/{id}', [CheckUserController::class, 'show']);
 Route::post('/uudd', [CheckUserController::class, 'index']);
 
 route::get('/getCSRFToken', [HomeController::class, 'getCSRFToken']);
+
+// FB 登入
+Route::get('/auth/facebook-login', [LoginController::class, 'fbLogin'])->name('fb-login');
+// FB 登入 callback
+Route::get('/auth/facebook-login-callback', [LoginController::class, 'fbLoginCallback']);
+
+Route::prefix('/auth')->group(function () {
+    // 登入
+    Route::get('/line-login', [ThirdPartyAuthController::class, 'redirectToProvider'])->name('line-login');
+    // 第三方回傳
+    Route::get('/line-login-callback', [ThirdPartyAuthController::class, 'callback']);
+    // 登出
+    Route::get('/line-logout', [ThirdPartyAuthController::class, 'logout']);
+});

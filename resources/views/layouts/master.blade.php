@@ -1,5 +1,8 @@
 <html>
+
 <head>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v18.0&appId=768086825337618" nonce="p8Yq7XKp"></script>
 <title>Laravel 商店</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
@@ -24,6 +27,8 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                 @if(!Auth::user())
+                <div class="fb-login-button" data-width="" data-size="" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                    <li><a href="{{ route('line-login') }}">LINE登入</a></li>
                     <li><a href="{{ route('login') }}">登入</a></li>
                     <li><a href="{{ route('register-user') }}">註冊</a></li>
                 @else
